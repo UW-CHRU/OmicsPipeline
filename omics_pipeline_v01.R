@@ -1,5 +1,5 @@
 
-
+ 
 ## outcome  string column name
 ## covariates  should be a c() list e.g.  "c('sex','age','bmi')"
 ## omic_fn File path for omics data.  Should be matrix with omic as row, sample as col
@@ -120,12 +120,10 @@ runPipeline = function(outcome, covariates, omic_fn, phenofile, sample_id = 'sam
     options(mc.cores = num_cores)
 
     cat('reading omic data...\n')
-    #samps = read.csv(paste0(datadir,omic_root,'_samples.csv'),as.is=T)
-    #info = fread(paste0(datadir,omic_root,'_info.csv'))
     
     omic_suff = strsplit(omic_fn,"\\.")[[1]][-1] 
     
-    if(pheno_suff == 'Rda'){
+    if(omic_suff == 'Rda'){
         print('Loading omic data from Rda file')
         data = get(load(omic_fn))
     }else{
